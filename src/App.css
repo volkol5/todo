@@ -1,42 +1,122 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scrollbar-width:inherit;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+::-webkit-scrollbar {
+    width: 12px;
+    background: #f1f1f1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb {
+    background: #888;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
-.card {
-  padding: 2em;
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
-.read-the-docs {
-  color: #888;
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbb;
+    padding: 20px;
+    min-width: 40%;
+    border-radius: 10px;
+    border: black solid 2px;
+}
+
+.addTodo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.heading {
+    margin-bottom: 20px;
+}
+
+.newTodo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8vh;
+}
+
+.newTodo__input {
+    display: block;
+    width: 37vh;
+    font-size: 18px;
+    height: 34px;
+    border: black solid 2px;
+    padding: 2px;
+    border-radius: 5px 0 0 5px;
+}
+
+.newTodo__addButton {
+    display: block;
+    font-size: 18px;
+    padding: 6px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+}
+
+.display__container {
+    overflow: auto;
+    width: 90%;
+    height: 250px;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    border: black solid 2px;
+}
+
+#dropdown {
+    font-size: 18px;
+    height: 34px;
+    border: black solid 2px;
+    border-radius: 5px;
+}
+
+.todo {
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: black solid 2px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #bbb;
+}
+
+.todo__checkbox input {}
+
+.todo__checkbox label ::before {
+    background-image: url('./react-icons/io5/IoCheckboxOutline');
+}
+
+.checkbox input:checked+label::before {
+    background-image: url('./react-icons/io5/IoCheckbox');
+    /* Путь к изображению для отмеченного чекбокса */
+}
+
+.todo__checkbox label {
+    margin-left: 10px;
 }
