@@ -6,13 +6,13 @@ import './style.css';
 
 
 type SingleTodoProps = {
-    deleteTodo (id: number): void;
+    deleteTodo: (id: number) => void;
     editTodo: (id: number) => void;
     todo: Todo;
-    // ref: (element: any) => void;
+    toggleComplete: (id: number) => void; 
 }
 
-const SingleTodo: FC<SingleTodoProps> = ({ deleteTodo, editTodo, todo}) => {
+const SingleTodo: FC<SingleTodoProps> = ({ deleteTodo, editTodo, todo, toggleComplete}) => {
     let [isCompleted, setCompleted] = useState<boolean>(false);
 
     const deleteHandler = () => {
@@ -23,20 +23,16 @@ const SingleTodo: FC<SingleTodoProps> = ({ deleteTodo, editTodo, todo}) => {
         editTodo(todo.id);
     }
 
-    const completeHandler = () => {
-        setCompleted(!isCompleted);
-    }
-
     return (
         <div className="todo">
-            <div className="todo__checkbox" onClick={completeHandler}>
+            <div className="todo__checkbox" onClick={() => toggleComplete(todo.id)}>
                 <div className='checkimg'>
-                    {isCompleted
+                    {todo.completed
                         ? <IoCheckbox/>
                         : <IoCheckboxOutline/>
                     }
                 </div>
-                <div className={isCompleted ? 'completed' : ''} >{todo.value}</div>
+                <div className={todo.completed ? 'completed' : ''} >{todo.value}</div>
             </div>
             <div className="todo__icons">
                 <MdEdit onClick={editHandler} className='todo__edit' />

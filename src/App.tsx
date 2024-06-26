@@ -8,6 +8,11 @@ import Todo from './models/todo';
   Добавить возможность редактировать - иконка для редактирования, подттверждение, перерисовка
   Сделать так, чтобы при больших Todo не ломался блок
   Сделать сортировку
+  После того, как отметил тудушку сделанной, она перемещается вниз
+  Сделать Шрифт
+  Перевести сайт на относительные единицы
+  При доавление новой туду скрол бар автоматичеки прокручивается   
+  Использовать свойство isCompleted
 */
 const App: FC = () => {
   const [todosList, setTodosList] = useState<Todo[]>([])
@@ -24,6 +29,14 @@ const App: FC = () => {
     setTodosList(newTodosList);
   }
 
+  const toggleComplete = (id: number) => {
+      setTodosList(
+        todosList.map((todo) => 
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        )
+      )
+  }
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -32,10 +45,13 @@ const App: FC = () => {
         </div>
         <AddTodo
           addTodo={addTodo}
+          setTodosList={setTodosList}
+          todosList={todosList}
         />
         <DisplayTodos
           todosList={todosList}
           deleteTodo={deleteTodo}
+          toggleComplete={toggleComplete}
         />
       </div>
     </div>
