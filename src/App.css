@@ -106,17 +106,29 @@
     background-color: #bbb;
 }
 
-.todo__checkbox input {}
 
-.todo__checkbox label ::before {
-    background-image: url('./react-icons/io5/IoCheckboxOutline');
+.todo__checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.checkbox input:checked+label::before {
-    background-image: url('./react-icons/io5/IoCheckbox');
-    /* Путь к изображению для отмеченного чекбокса */
+.todo__edit {
+    margin-right: 10px;
 }
 
-.todo__checkbox label {
-    margin-left: 10px;
+.todo__icons > * {
+    cursor: pointer;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.checkimg  {
+    margin-right: 10px;
+}
+
+.checkimg > * {
+    transform: scale(1.5);
 }
