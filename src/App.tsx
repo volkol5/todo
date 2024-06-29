@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import './App.css';
 import DisplayTodos from './modules/DisplayTodos';
 import AddTodo from './modules/AddTodo';
@@ -7,34 +7,54 @@ import Todo from './models/todo';
 /*
   Добавить возможность редактировать - иконка для редактирования, подттверждение, перерисовка
   Сделать так, чтобы при больших Todo не ломался блок
-  Сделать сортировку
-  После того, как отметил тудушку сделанной, она перемещается вниз
   Сделать Шрифт
   Перевести сайт на относительные единицы
   При доавление новой туду скрол бар автоматичеки прокручивается   
-  Использовать свойство isCompleted
 */
+
 const App: FC = () => {
   const [todosList, setTodosList] = useState<Todo[]>([])
 
+  useEffect(() => {
+    const stored = localStorage.getItem('todos');
+
+    if (stored) {
+      setTodosList(JSON.parse(stored));
+    }
+  }, []);
+
+  const updateLocalStorage = (updatedTodos: Todo[]) => {
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+
+    setTodosList(updatedTodos);
+  }
+
   const addTodo = (todo: string) => {
-    setTodosList([
+    const updatedTodos = ([
         ...todosList,
         {id: new Date().getTime(), completed: false, value: todo}
     ]);
+
+    updateLocalStorage(updatedTodos);
+    setTodosList(updatedTodos);
   }
 
   const deleteTodo = (id: number) => {
     const newTodosList = todosList.filter((todo: Todo) => todo.id !== id);
+
+    updateLocalStorage(newTodosList);
     setTodosList(newTodosList);
   }
 
   const toggleComplete = (id: number) => {
-      setTodosList(
+      const updatedTodos = (
         todosList.map((todo) => 
           todo.id === id ? { ...todo, completed: !todo.completed } : todo
         )
       )
+
+      updateLocalStorage(updatedTodos);
+      setTodosList(updatedTodos);
   }
 
   return (
@@ -47,6 +67,7 @@ const App: FC = () => {
           addTodo={addTodo}
           setTodosList={setTodosList}
           todosList={todosList}
+          updateLocalSorage={updateLocalStorage}
         />
         <DisplayTodos
           todosList={todosList}

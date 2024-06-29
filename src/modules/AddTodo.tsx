@@ -7,9 +7,10 @@ interface UpperFormsProps {
     addTodo: (todo: string) => void;
     setTodosList: React.Dispatch<React.SetStateAction<Todo[]>>;
     todosList: Todo[];
+    updateLocalSorage: (updatedTodos: Todo[]) => any;
 }
 
-const UpperForms: FC<UpperFormsProps> = ({ addTodo, todosList, setTodosList }) => {
+const UpperForms: FC<UpperFormsProps> = ({ addTodo, todosList, setTodosList, updateLocalSorage }) => {
     let [value, setValue] = useState<string>('');
     let [typeSorting, setTypeSorting] = useState<string>('All')
 
@@ -32,7 +33,7 @@ const UpperForms: FC<UpperFormsProps> = ({ addTodo, todosList, setTodosList }) =
         if (currentTypeSorting !== typeSorting) {
             setTypeSorting(currentTypeSorting);
         
-            let sortedList = [...todosList];
+            let sortedList: Todo[] = [...todosList];
         
             if (currentTypeSorting.toLowerCase() === 'completed') {
                 sortedList.sort((a, b) => Number(b.completed) - Number(a.completed));
@@ -47,6 +48,7 @@ const UpperForms: FC<UpperFormsProps> = ({ addTodo, todosList, setTodosList }) =
             }
         
             setTodosList(sortedList);
+            updateLocalSorage(sortedList);
         }
     }
     

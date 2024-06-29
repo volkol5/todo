@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { MdDelete, MdEdit } from "react-icons/md";
 import { IoCheckbox, IoCheckboxOutline } from 'react-icons/io5'
 import Todo from '../models/todo';
@@ -13,8 +13,6 @@ type SingleTodoProps = {
 }
 
 const SingleTodo: FC<SingleTodoProps> = ({ deleteTodo, editTodo, todo, toggleComplete}) => {
-    let [isCompleted, setCompleted] = useState<boolean>(false);
-
     const deleteHandler = () => {
         deleteTodo(todo.id);
     }
